@@ -32,6 +32,8 @@ Hay tres niveles:
 
 La corrección es inmediata. En preguntas con más de dos opciones existe un segundo intento. El botón de ayuda resta **0,25 puntos** en esa pregunta.
 
+La aplicación incluye una **calculadora integrada** para realizar operaciones durante la prueba, sin penalización.
+
 Al finalizar se muestra:
 
 - puntuación;
