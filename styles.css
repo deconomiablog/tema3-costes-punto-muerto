@@ -17,3 +17,20 @@ main{max-width:1040px;margin:0 auto;padding:14px 24px 34px}.panel{background:rgb
 .results-panel{max-width:800px;margin:0 auto}.result-hero{display:flex;gap:24px;align-items:center}.score-circle{width:118px;height:118px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:2.3rem;font-weight:900;flex:0 0 auto}.result-hero h2{margin:5px 0 8px}.result-hero p{color:var(--muted)}.diagnosis{margin:24px 0;padding:17px;border-radius:16px;background:#f5f7f8;line-height:1.45}.skill-results{display:grid;gap:10px}.skill-line{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.skill-bar{grid-column:1/-1;height:7px;background:#edf0f3;border-radius:99px;overflow:hidden}.skill-bar span{display:block;height:100%;background:var(--green)}.result-actions{display:flex;gap:12px;margin-top:26px}.result-actions>*{flex:1}
 footer{max-width:1040px;margin:0 auto;padding:0 24px 28px;display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem}
 @media(max-width:760px){.site-header{display:block}.blog-link{display:inline-block;margin-top:12px}.intro-grid,.choice-grid,.level-row{grid-template-columns:1fr}.panel{padding:20px;border-radius:20px}.choice-card{min-height:0}.quiz-topbar{align-items:flex-start}.actions-row,.result-actions{flex-direction:column}.result-hero{align-items:flex-start}.source-links{flex-direction:column;align-items:center}.numeric-wrap{align-items:flex-start;flex-direction:column}.brand-mark{display:none}}
+
+.calc-toggle-btn{border:1px solid #c8d6e2;border-radius:14px;padding:11px 14px;background:#f7fbfe;color:var(--blue);font-weight:800;white-space:nowrap}
+.calc-toggle-btn:hover{background:#edf5fb}
+.calculator{margin:18px 0 8px;padding:16px;border:1px solid var(--line);border-radius:18px;background:#f8fafc}
+.calculator-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:12px}
+.calculator-head strong{display:block;color:var(--ink)}
+.calculator-head span{display:block;color:var(--muted);font-size:.82rem;margin-top:3px}
+.calc-close-btn{border:0;background:#e9eef2;color:#475569;width:36px;height:36px;border-radius:10px;font-size:1.35rem;line-height:1}
+.calc-display{width:100%;border:2px solid #cfd8e3;background:#fff;border-radius:14px;padding:13px 14px;text-align:right;font-size:1.3rem;font-weight:750;color:var(--ink);margin-bottom:10px}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.calc-key{min-height:46px;border:1px solid #d6dde6;background:#fff;border-radius:12px;font-weight:800;color:var(--ink)}
+.calc-key:hover{background:#f0f5f8}
+.calc-key-soft{background:#eef2f5;color:#475569}
+.calc-key-op{background:#eaf3f9;color:var(--blue);border-color:#c7ddeb}
+.calc-key-equals{background:var(--green);color:#fff;border-color:var(--green)}
+.calc-message{min-height:1.1em;margin:8px 2px 0;color:var(--red);font-size:.82rem}
+@media(max-width:760px){.quiz-topbar{flex-wrap:wrap}.calc-toggle-btn{order:3;width:100%}.progress-wrap{min-width:180px}.calculator{padding:13px}.calc-key{min-height:44px}}
