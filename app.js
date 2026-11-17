@@ -43,42 +43,35 @@ $('#diagnosis').innerHTML=score>=8?`<strong>Diagnóstico:</strong> buena compren
 $('#skillResults').innerHTML=es.map(e=>`<div class="skill-line"><strong>${e.skill}</strong><span>${e.correct}/${e.total}</span><div class="skill-bar"><span style="width:${e.pct}%"></span></div></div>`).join('')}
 
 
-function toggleCalculator(){
-  const calc=$('#calculator'),btn=$('#calcToggleBtn'),opening=calc.classList.contains('hidden');
-  calc.classList.toggle('hidden');
-  btn.setAttribute('aria-expanded',String(opening));
-  if(opening) $('#calcDisplay').focus();
+function openCalculator(){
+  const calc=$('#calculator');
+  calc.classList.add('open');
+  calc.setAttribute('aria-hidden','false');
 }
 function closeCalculator(){
-  const calc=$('#calculator'),btn=$('#calcToggleBtn');
-  if(calc) calc.classList.add('hidden');
-  if(btn) btn.setAttribute('aria-expanded','false');
+  const calc=$('#calculator');
+  if(!calc)return;
+  calc.classList.remove('open');
+  calc.setAttribute('aria-hidden','true');
 }
 function resetCalculator(){
   if($('#calcDisplay')) $('#calcDisplay').value='';
-  if($('#calcMessage')) $('#calcMessage').textContent='';
 }
 function handleCalculator(key){
-  const display=$('#calcDisplay'),message=$('#calcMessage');
+  const display=$('#calcDisplay');
   if(!display)return;
-  message.textContent='';
-  if(key==='clear'){display.value='';return}
-  if(key==='back'){display.value=display.value.slice(0,-1);return}
-  if(key==='='){
-    const raw=display.value.trim();
-    if(!raw){return}
-    if(!/^[0-9+\-*/().\s]+$/.test(raw)){message.textContent='Expresión no válida.';return}
+  if(key==='C') display.value='';
+  else if(key==='⌫') display.value=display.value.slice(0,-1);
+  else if(key==='='){
     try{
-      const value=Function('"use strict";return ('+raw+')')();
+      const expr=display.value.replace(/,/g,'.');
+      if(!/^[0-9+\-*/().\s]+$/.test(expr)) throw new Error('invalid');
+      const value=Function('"use strict";return ('+expr+')')();
       if(!Number.isFinite(value)) throw new Error('invalid');
       display.value=String(Math.round((value+Number.EPSILON)*100000000)/100000000).replace('.',',');
-    }catch(e){message.textContent='Revisa la operación.'}
-    return;
+    }catch(e){display.value='Error'}
+  }else{
+    if(display.value==='Error') display.value='';
+    display.value+=key;
   }
-  if(display.value.includes(',') && /[+\-*/()]/.test(key)) display.value=display.value.replaceAll(',','.');
-  if(key==='.' && /(?:^|[+\-*/(])\d*$/.test(display.value)===false){
-    const last=display.value.split(/[+\-*/()]/).pop();
-    if(last.includes('.')||last.includes(','))return;
-  }
-  display.value+=key;
 }
