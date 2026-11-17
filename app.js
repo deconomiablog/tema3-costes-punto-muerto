@@ -5,7 +5,7 @@ const labels={costes:'Costes de producción',punto:'Umbral de rentabilidad',mixt
 $$('#topicChoices .choice-card').forEach(b=>b.onclick=()=>{$$('#topicChoices .choice-card').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.topic=b.dataset.topic});
 $$('#levelChoices .level-btn').forEach(b=>b.onclick=()=>{$$('#levelChoices .level-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.level=b.dataset.level});
 $('#startBtn').onclick=startQuiz;$('#repeatBtn').onclick=startQuiz;$('#homeBtn').onclick=showSetup;$('#quitBtn').onclick=showSetup;$('#checkBtn').onclick=checkAnswer;$('#nextBtn').onclick=nextQuestion;$('#hintBtn').onclick=showHint;
-$('#calcToggleBtn').onclick=toggleCalculator;$('#calcCloseBtn').onclick=closeCalculator;
+$('#calcToggle').onclick=openCalculator;$('#calcClose').onclick=closeCalculator;
 $('[data-calc]').forEach(b=>b.onclick=()=>handleCalculator(b.dataset.calc));
 
 function make(bank,n){return shuffle(bank.filter(f=>f().level===state.level)).slice(0,n).map(f=>f())}
