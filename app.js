@@ -5,11 +5,13 @@ const labels={costes:'Costes de producción',punto:'Umbral de rentabilidad',mixt
 $$('#topicChoices .choice-card').forEach(b=>b.onclick=()=>{$$('#topicChoices .choice-card').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.topic=b.dataset.topic});
 $$('#levelChoices .level-btn').forEach(b=>b.onclick=()=>{$$('#levelChoices .level-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.level=b.dataset.level});
 $('#startBtn').onclick=startQuiz;$('#repeatBtn').onclick=startQuiz;$('#homeBtn').onclick=showSetup;$('#quitBtn').onclick=showSetup;$('#checkBtn').onclick=checkAnswer;$('#nextBtn').onclick=nextQuestion;$('#hintBtn').onclick=showHint;
+$('#calcToggleBtn').onclick=toggleCalculator;$('#calcCloseBtn').onclick=closeCalculator;
+$('[data-calc]').forEach(b=>b.onclick=()=>handleCalculator(b.dataset.calc));
 
 function make(bank,n){return shuffle(bank.filter(f=>f().level===state.level)).slice(0,n).map(f=>f())}
 function buildQuestions(){return state.topic==='mixta'?shuffle([...make(questionBanks.costes,5),...make(questionBanks.punto,5)]):make(questionBanks[state.topic],10)}
-function startQuiz(){state.questions=buildQuestions();state.index=0;state.score=0;state.skillStats={};state.hintsUsed=0;$('#setup').classList.add('hidden');$('#results').classList.add('hidden');$('#quiz').classList.remove('hidden');renderQuestion()}
-function showSetup(){$('#quiz').classList.add('hidden');$('#results').classList.add('hidden');$('#setup').classList.remove('hidden')}
+function startQuiz(){state.questions=buildQuestions();state.index=0;state.score=0;state.skillStats={};state.hintsUsed=0;resetCalculator();closeCalculator();$('#setup').classList.add('hidden');$('#results').classList.add('hidden');$('#quiz').classList.remove('hidden');renderQuestion()}
+function showSetup(){closeCalculator();$('#quiz').classList.add('hidden');$('#results').classList.add('hidden');$('#setup').classList.remove('hidden')}
 const current=()=>state.questions[state.index];
 
 function renderQuestion(){const q=current();state.usedHint=false;state.attempts=0;state.answered=false;state.selected=null;
@@ -39,3 +41,44 @@ function showResults(){$('#quiz').classList.add('hidden');$('#results').classLis
 let es=Object.entries(state.skillStats).map(([skill,s])=>({skill,...s,pct:Math.round(100*s.correct/s.total)})).sort((a,b)=>a.pct-b.pct),weak=es[0],strong=es[es.length-1];
 $('#diagnosis').innerHTML=score>=8?`<strong>Diagnóstico:</strong> buena comprensión general. Mejor resultado: <strong>${strong.skill}</strong>${weak&&weak.pct<100?`; revisa <strong>${weak.skill}</strong>`:''}.`:`<strong>Diagnóstico:</strong> repasa especialmente <strong>${weak?.skill||'las fórmulas básicas'}</strong>. Repite otra prueba: las preguntas y varios datos cambiarán.`;
 $('#skillResults').innerHTML=es.map(e=>`<div class="skill-line"><strong>${e.skill}</strong><span>${e.correct}/${e.total}</span><div class="skill-bar"><span style="width:${e.pct}%"></span></div></div>`).join('')}
+
+
+function toggleCalculator(){
+  const calc=$('#calculator'),btn=$('#calcToggleBtn'),opening=calc.classList.contains('hidden');
+  calc.classList.toggle('hidden');
+  btn.setAttribute('aria-expanded',String(opening));
+  if(opening) $('#calcDisplay').focus();
+}
+function closeCalculator(){
+  const calc=$('#calculator'),btn=$('#calcToggleBtn');
+  if(calc) calc.classList.add('hidden');
+  if(btn) btn.setAttribute('aria-expanded','false');
+}
+function resetCalculator(){
+  if($('#calcDisplay')) $('#calcDisplay').value='';
+  if($('#calcMessage')) $('#calcMessage').textContent='';
+}
+function handleCalculator(key){
+  const display=$('#calcDisplay'),message=$('#calcMessage');
+  if(!display)return;
+  message.textContent='';
+  if(key==='clear'){display.value='';return}
+  if(key==='back'){display.value=display.value.slice(0,-1);return}
+  if(key==='='){
+    const raw=display.value.trim();
+    if(!raw){return}
+    if(!/^[0-9+\-*/().\s]+$/.test(raw)){message.textContent='Expresión no válida.';return}
+    try{
+      const value=Function('"use strict";return ('+raw+')')();
+      if(!Number.isFinite(value)) throw new Error('invalid');
+      display.value=String(Math.round((value+Number.EPSILON)*100000000)/100000000).replace('.',',');
+    }catch(e){message.textContent='Revisa la operación.'}
+    return;
+  }
+  if(display.value.includes(',') && /[+\-*/()]/.test(key)) display.value=display.value.replaceAll(',','.');
+  if(key==='.' && /(?:^|[+\-*/(])\d*$/.test(display.value)===false){
+    const last=display.value.split(/[+\-*/()]/).pop();
+    if(last.includes('.')||last.includes(','))return;
+  }
+  display.value+=key;
+}
