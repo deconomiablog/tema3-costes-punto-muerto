@@ -6,7 +6,7 @@ $$('#topicChoices .choice-card').forEach(b=>b.onclick=()=>{$$('#topicChoices .ch
 $$('#levelChoices .level-btn').forEach(b=>b.onclick=()=>{$$('#levelChoices .level-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.level=b.dataset.level});
 $('#startBtn').onclick=startQuiz;$('#repeatBtn').onclick=startQuiz;$('#homeBtn').onclick=showSetup;$('#quitBtn').onclick=showSetup;$('#checkBtn').onclick=checkAnswer;$('#nextBtn').onclick=nextQuestion;$('#hintBtn').onclick=showHint;
 $('#calcToggle').onclick=openCalculator;$('#calcClose').onclick=closeCalculator;
-$('[data-calc]').forEach(b=>b.onclick=()=>handleCalculator(b.dataset.calc));
+$$('[data-calc]').forEach(b=>b.onclick=()=>handleCalculator(b.dataset.calc));
 
 function make(bank,n){return shuffle(bank.filter(f=>f().level===state.level)).slice(0,n).map(f=>f())}
 function buildQuestions(){return state.topic==='mixta'?shuffle([...make(questionBanks.costes,5),...make(questionBanks.punto,5)]):make(questionBanks[state.topic],10)}
