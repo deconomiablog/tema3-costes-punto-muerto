@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Práctica de costes de producción y umbral de rentabilidad para Economía de 1º de Bachillerato." />
+  <title>Tema 3 · Costes y punto muerto | D'economíaBlog</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">€</div>
+      <div>
+        <p class="eyebrow">Economía · 1º Bachillerato</p>
+        <h1>Tema 3 · Entrena costes y punto muerto</h1>
+        <p class="subtitle">Preguntas breves para comprender los ejercicios antes de resolverlos completos.</p>
+      </div>
+    </div>
+    <a class="blog-link" href="https://www.deconomiablog.com/" target="_blank" rel="noopener">D'economíaBlog ↗</a>
+  </header>
+
+  <main>
+    <section id="setup" class="panel setup-panel">
+      <div class="intro-grid">
+        <div>
+          <span class="pill">10 preguntas por intento</span>
+          <h2>¿Qué quieres practicar?</h2>
+          <p>Cada intento selecciona preguntas al azar. En varias preguntas los datos cambian automáticamente.</p>
+        </div>
+        <div class="mini-rules">
+          <p><strong>Feedback inmediato</strong> después de cada respuesta.</p>
+          <p><strong>2º intento</strong> en preguntas con más de dos opciones.</p>
+          <p><strong>Ayuda disponible</strong>, con penalización de 0,25 puntos.</p>
+        </div>
+      </div>
+
+      <div class="choice-grid" id="topicChoices">
+        <button class="choice-card selected costs" data-topic="costes">
+          <span class="choice-icon">∑</span>
+          <strong>Costes de producción</strong>
+          <small>CF, CV, CT, costes medios y coste marginal</small>
+        </button>
+        <button class="choice-card break" data-topic="punto">
+          <span class="choice-icon">×</span>
+          <strong>Umbral de rentabilidad</strong>
+          <small>Ingresos, beneficio, margen y punto muerto</small>
+        </button>
+        <button class="choice-card mixed" data-topic="mixta">
+          <span class="choice-icon">↔</span>
+          <strong>Prueba mixta</strong>
+          <small>5 preguntas de cada bloque</small>
+        </button>
+      </div>
+
+      <h3 class="section-label">Elige nivel</h3>
+      <div class="level-row" id="levelChoices">
+        <button class="level-btn selected" data-level="basico"><strong>Básico</strong><span>Identificar y calcular</span></button>
+        <button class="level-btn" data-level="aplicacion"><strong>Aplicación</strong><span>Interpretar y relacionar</span></button>
+        <button class="level-btn" data-level="reto"><strong>Reto</strong><span>Cambios y decisiones</span></button>
+      </div>
+
+      <button id="startBtn" class="primary-btn">Empezar práctica</button>
+
+      <div class="source-links">
+        <a href="https://www.deconomiablog.com/2026/10/los-costes-de-produccion.html" target="_blank" rel="noopener">Repasar costes ↗</a>
+        <a href="https://www.deconomiablog.com/2026/10/el-umbral-de-rentabilidad-o-punto-muerto.html" target="_blank" rel="noopener">Repasar punto muerto ↗</a>
+      </div>
+    </section>
+
+    <section id="quiz" class="panel quiz-panel hidden" aria-live="polite">
+      <div class="quiz-topbar">
+        <button id="quitBtn" class="ghost-btn">← Inicio</button>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span id="progressText">Pregunta 1 de 10</span><span id="scoreText">0,00 / 10</span></div>
+          <div class="progress"><div id="progressBar"></div></div>
+        </div>
+      </div>
+
+      <div class="question-meta">
+        <span id="topicBadge" class="pill"></span>
+        <span id="skillBadge" class="skill-pill"></span>
+      </div>
+      <h2 id="questionText"></h2>
+      <div id="visualArea"></div>
+      <div id="answerArea"></div>
+
+      <div class="actions-row">
+        <button id="hintBtn" class="hint-btn">💡 Consultar ayuda (−0,25)</button>
+        <button id="checkBtn" class="primary-btn compact">Comprobar</button>
+      </div>
+      <div id="hintBox" class="hint-box hidden"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="nextBtn" class="primary-btn next-btn hidden">Siguiente →</button>
+    </section>
+
+    <section id="results" class="panel results-panel hidden">
+      <div class="result-hero">
+        <div id="resultScore" class="score-circle">0</div>
+        <div>
+          <p class="eyebrow">Resultado</p>
+          <h2 id="resultTitle">Práctica completada</h2>
+          <p id="resultSummary"></p>
+        </div>
+      </div>
+      <div id="diagnosis" class="diagnosis"></div>
+      <div id="skillResults" class="skill-results"></div>
+      <div class="result-actions">
+        <button id="repeatBtn" class="primary-btn">Otra prueba de 10</button>
+        <button id="homeBtn" class="ghost-btn">Cambiar bloque o nivel</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Economía · 1º Bachillerato</span>
+    <span>D'economíaBlog</span>
+  </footer>
+
+  <script src="question-helpers.js"></script>
+  <script src="costs.js"></script>
+  <script src="point.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
