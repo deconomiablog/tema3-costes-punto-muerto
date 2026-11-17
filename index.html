@@ -17,7 +17,10 @@
         <p class="subtitle">Preguntas breves para comprender los ejercicios antes de resolverlos completos.</p>
       </div>
     </div>
-    <a class="blog-link" href="https://www.deconomiablog.com/" target="_blank" rel="noopener">D'economíaBlog ↗</a>
+    <div class="top-actions">
+      <button class="icon-btn" id="calcToggle" type="button" aria-label="Abrir calculadora">🧮 <span>Calculadora</span></button>
+      <a class="blog-link" href="https://www.deconomiablog.com/" target="_blank" rel="noopener">D'economíaBlog ↗</a>
+    </div>
   </header>
 
   <main>
@@ -77,46 +80,6 @@
         </div>
       </div>
 
-      <button id="calcToggleBtn" class="calc-toggle-btn" type="button" aria-expanded="false" aria-controls="calculator">🧮 Calculadora</button>
-
-      <div id="calculator" class="calculator hidden" aria-label="Calculadora">
-        <div class="calculator-head">
-          <div>
-            <strong>Calculadora</strong>
-            <span>Úsala para realizar los cálculos de la pregunta.</span>
-          </div>
-          <button id="calcCloseBtn" class="calc-close-btn" type="button" aria-label="Cerrar calculadora">×</button>
-        </div>
-        <input id="calcDisplay" class="calc-display" type="text" inputmode="decimal" aria-label="Pantalla de la calculadora" placeholder="0" readonly>
-        <div class="calc-grid">
-          <button type="button" data-calc="clear" class="calc-key calc-key-soft">C</button>
-          <button type="button" data-calc="back" class="calc-key calc-key-soft">⌫</button>
-          <button type="button" data-calc="(" class="calc-key calc-key-soft">(</button>
-          <button type="button" data-calc=")" class="calc-key calc-key-soft">)</button>
-
-          <button type="button" data-calc="7" class="calc-key">7</button>
-          <button type="button" data-calc="8" class="calc-key">8</button>
-          <button type="button" data-calc="9" class="calc-key">9</button>
-          <button type="button" data-calc="/" class="calc-key calc-key-op">÷</button>
-
-          <button type="button" data-calc="4" class="calc-key">4</button>
-          <button type="button" data-calc="5" class="calc-key">5</button>
-          <button type="button" data-calc="6" class="calc-key">6</button>
-          <button type="button" data-calc="*" class="calc-key calc-key-op">×</button>
-
-          <button type="button" data-calc="1" class="calc-key">1</button>
-          <button type="button" data-calc="2" class="calc-key">2</button>
-          <button type="button" data-calc="3" class="calc-key">3</button>
-          <button type="button" data-calc="-" class="calc-key calc-key-op">−</button>
-
-          <button type="button" data-calc="0" class="calc-key">0</button>
-          <button type="button" data-calc="." class="calc-key">,</button>
-          <button type="button" data-calc="=" class="calc-key calc-key-equals">=</button>
-          <button type="button" data-calc="+" class="calc-key calc-key-op">+</button>
-        </div>
-        <p id="calcMessage" class="calc-message" aria-live="polite"></p>
-      </div>
-
       <div class="question-meta">
         <span id="topicBadge" class="pill"></span>
         <span id="skillBadge" class="skill-pill"></span>
@@ -151,6 +114,22 @@
       </div>
     </section>
   </main>
+
+  <aside id="calculator" class="calculator" aria-hidden="true">
+    <div class="calc-head">
+      <strong>Calculadora</strong>
+      <button id="calcClose" type="button" aria-label="Cerrar calculadora">×</button>
+    </div>
+    <input id="calcDisplay" inputmode="decimal" autocomplete="off" aria-label="Pantalla de calculadora">
+    <div class="calc-grid">
+      <button type="button" data-calc="C" class="muted">C</button><button type="button" data-calc="(">(</button><button type="button" data-calc=")">)</button><button type="button" data-calc="/" class="op">÷</button>
+      <button type="button" data-calc="7">7</button><button type="button" data-calc="8">8</button><button type="button" data-calc="9">9</button><button type="button" data-calc="*" class="op">×</button>
+      <button type="button" data-calc="4">4</button><button type="button" data-calc="5">5</button><button type="button" data-calc="6">6</button><button type="button" data-calc="-" class="op">−</button>
+      <button type="button" data-calc="1">1</button><button type="button" data-calc="2">2</button><button type="button" data-calc="3">3</button><button type="button" data-calc="+" class="op">+</button>
+      <button type="button" data-calc="0">0</button><button type="button" data-calc=".">,</button><button type="button" data-calc="⌫">⌫</button><button type="button" data-calc="=" class="equals">=</button>
+    </div>
+    <p class="calc-note">Puedes usarla durante toda la práctica. No penaliza la puntuación.</p>
+  </aside>
 
   <footer>
     <span>Economía · 1º Bachillerato</span>
